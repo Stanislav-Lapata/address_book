@@ -18,7 +18,7 @@ class PeopleController < ApplicationController
     if person.save
       render json: person, include: [:email_addresses_attributes, :phone_numbers_attributes]
     else
-      render json: {errors: person.errors.full_messages.join(', ')}
+      render json: {errors: person.errors.values.join(', ')}
     end
   end
 
@@ -27,6 +27,9 @@ class PeopleController < ApplicationController
     if person.update(params_person)
       render json: person, include: [:email_addresses_attributes, :phone_numbers_attributes]
     else
+      errors =  person.errors.full_messages.each do |err|
+
+      end
       render json: {errors: person.errors.full_messages.join(', ')}
     end
   end

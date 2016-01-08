@@ -6,6 +6,8 @@ class Person < ActiveRecord::Base
   has_many :phone_numbers_attributes, class_name: PhoneNumber, dependent: :destroy
   accepts_nested_attributes_for :email_addresses, :phone_numbers, allow_destroy: true
 
+  validates :first_name, presence: { message: "First name can't be blank"}
+  validates :last_name, presence: { message: "Last name can't be blank"}
   validates :email_addresses, presence: true
   validates :phone_numbers, presence: true
   validates_uniqueness_of :first_name, scope: :last_name
