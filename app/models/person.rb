@@ -10,7 +10,7 @@ class Person < ActiveRecord::Base
   validates :last_name, presence: { message: "Last name can't be blank"}
   validates :email_addresses, presence: true
   validates :phone_numbers, presence: true
-  validates_uniqueness_of :first_name, scope: :last_name
+  validates_uniqueness_of :first_name, scope: :last_name, message: "Full name in not unique"
 
   def self.to_csv
     attributes = %w{id first_name last_name email_addresses phone_numbers}

@@ -38,10 +38,10 @@ div.row ng-hide="personShowed"
         th Email address
         th Phone numbers
         th Сontrol panel
-      tr.cursor ng-repeat="person in people | filter:search | orderBy:sort:reverse" ng-mouseover="showPanel = true" ng-mouseleave="showPanel = false"
-        td ng-click="showPerson(person)"
+      tr ng-repeat="person in people | filter:search | orderBy:sort:reverse" ng-mouseover="showPanel = true" ng-mouseleave="showPanel = false"
+        td.cursor ng-click="showPerson(person)"
           | {{person.first_name}}
-        td
+        td.cursor ng-click="showPerson(person)"
           | {{person.last_name}}
         td
           p ng-repeat="email in person.email_addresses_attributes | filter: {'_destroy': '!1'}"
@@ -58,18 +58,19 @@ div.row ng-show="personShowed"
   div.col-xs-12.col-md-12
     h2
       | {{firstName}} &nbsp; {{lastName}}
-    div.emails
-      | Emails:
-      ul
-        li ng-repeat="email in emails"
-          a href="mailto:{{email.email}}"
-            | {{email.email}}
-    div.phones
-      | Phone numbers:
-      ul
-        li ng-repeat="phone in phoneNumbers"
-          | {{phone.phone_number}}
+  div.col-xs-3.col-md-3
+    h3 Email addresses:
+    ul.list-unstyled
+      li ng-repeat="email in emails"
+        a href="mailto:{{email.email}}"
+          | {{email.email}}
     a href="" ng-click="showPeople()" Назад
+
+  div.col-xs-3.col-md-3
+    h3 Phone numbers:
+    ul.list-unstyled
+      li ng-repeat="phone in phoneNumbers"
+        | {{phone.phone_number}}
 
 
 
