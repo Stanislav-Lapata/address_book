@@ -23,6 +23,7 @@ class PeopleController < ApplicationController
   end
 
   def update
+    binding.pry
     person = Person.find(params[:id])
     if person.update(params_person)
       render json: person, include: [:email_addresses_attributes, :phone_numbers_attributes]

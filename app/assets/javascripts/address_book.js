@@ -15,34 +15,33 @@ app.factory('PhoneNumber', ['$resource', function($resource){
 
 app.controller('PeopleCtrl', ['$scope', 'Person', 'EmailAddress', 'PhoneNumber', function($scope, Person, EmailAddress, PhoneNumber){
   $scope.people = Person.query();
-  $scope.newPerson = {email_addresses_attributes: [{email: ""}], phone_numbers_attributes: [{phone_number: ""}]};
-  $scope.newPerson = {email_addresses_attributes: [{email: ""}], phone_numbers_attributes: [{phone_number: ""}]};
+  $scope.newPerson = {email_addresses_attributes: [{email: "", _destroy:""}], phone_numbers_attributes: [{phone_number: "", _destroy:""}]};
   $scope.addPerson = function () {
     if ($scope.newPerson.id) {
-      Person.update($scope.newPerson).$promise.then(function (responce) {
-        if (responce.id) {
+      Person.update($scope.newPerson).$promise.then(function (response) {
+        if (response.id) {
         $scope.errors = {errors: ""};
         $scope.newPerson = {email_addresses_attributes: [{email: ""}], phone_numbers_attributes: [{phone_number: ""}]};
         }
         else
         {
-          $scope.errors = responce;
+          $scope.errors = response;
         }
       });
     }
     else {
-      person = Person.save($scope.newPerson).$promise.then(function (responce) {
-        if (responce.id)
+      person = Person.save($scope.newPerson).$promise.then(function (response) {
+        if (response.id)
           {
-            $scope.people.push(responce);
+            $scope.people.push(response);
             $scope.newPerson = {email_addresses_attributes: [{email: ""}], phone_numbers_attributes: [{phone_number: ""}]}
             $scope.errors = {errors: ""};
           }
         else
           {
-            $scope.errors = responce;
+            $scope.errors = response;
           }
-      })
+      });
     };
   };
   $scope.personShowed = false;
@@ -52,14 +51,13 @@ app.controller('PeopleCtrl', ['$scope', 'Person', 'EmailAddress', 'PhoneNumber',
     $scope.lastName = person.last_name;
     $scope.emails = person.email_addresses_attributes;
     $scope.phoneNumbers = person.phone_numbers_attributes;
-
   };
   $scope.showPeople = function() {
     $scope.personShowed = false;
   };
 
   $scope.updatePerson = function (person) {
-    console.log(person)
+    console.log(person);
     $scope.newPerson = person;
   };
   $scope.destroyPerson = function (person) {
@@ -80,9 +78,7 @@ app.controller('PeopleCtrl', ['$scope', 'Person', 'EmailAddress', 'PhoneNumber',
   $scope.deletePhoneNumber = function (phone_number) {
     console.log(phone_number);
     if (confirm("Are you sure?")) {
-      PhoneNumber.remove(phone_number)
-      index = $scope.newPerson.phone_numbers_attributes.indexOf(phone_number)
-      $scope.newPerson.phone_numbers_attributes.splice(index, 1)
+      phone_number._destroy = 1
     };
   };
 

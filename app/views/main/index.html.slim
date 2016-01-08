@@ -12,7 +12,7 @@ div.row ng-hide="personShowed"
       span
         span.email ng-repeat="phone_number in newPerson.phone_numbers_attributes"
           input type="tel" placeholder="Phone number" ng-model="phone_number.phone_number"
-          input type="button" value="-" ng-click="deletePhoneNumber(phone_number)"
+          input type="button" value="-" ng-model="phone_number._destroy" ng-click="deletePhoneNumber(phone_number)"
         input type="button" value="+" ng-click="addFieldPhone()"
       input type="submit"
       br
