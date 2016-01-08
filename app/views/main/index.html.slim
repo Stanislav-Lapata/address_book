@@ -1,0 +1,70 @@
+div.row ng-hide="personShowed"
+  div.col-xs-12
+    form ng-submit="addPerson()"
+      | Create person:
+      input type="text" placeholder="First name" ng-model="newPerson.first_name" required=""
+      input type="text" placeholder="Last name" ng-model="newPerson.last_name" required=""
+      span
+        span.email ng-repeat="email_address in newPerson.email_addresses_attributes"
+          input type="email" placeholder="Email address" ng-model="email_address.email"
+          input type="button" value="-" ng-click="deleteEmailAddress(email_address)"
+        input type="button" value="+" ng-click="addFieldEmail()"
+      span
+        span.email ng-repeat="phone_number in newPerson.phone_numbers_attributes"
+          input type="tel" placeholder="Phone number" ng-model="phone_number.phone_number"
+          input type="button" value="-" ng-click="deletePhoneNumber(phone_number)"
+        input type="button" value="+" ng-click="addFieldPhone()"
+      input type="submit"
+
+div.row ng-hide="personShowed"
+  div.col-xs-2
+    | First name
+    input type="text" ng-model="search.first_name"
+    br
+    | Last name
+    input type="text" ng-model="search.last_name"
+
+  div.col-xs-10
+    table
+      tr
+        th
+          a href="" ng-click="sort = 'first_name'; reverse=!reverse" First name
+        th
+          a href="" ng-click="sort = 'last_name'; reverse=!reverse" Last name
+        th Email address
+        th Phone numbers
+      tr.cursor ng-repeat="person in people | filter:search | orderBy:sort:reverse" ng-mouseover="showPanel = true" ng-mouseleave="showPanel = false"
+        td ng-click="showPerson(person)"
+          | {{person.first_name}}
+        td
+          | {{person.last_name}}
+        td
+          p ng-repeat="email in person.email_addresses_attributes"
+            | {{email.email}}
+        td
+          p ng-repeat="phone in person.phone_numbers_attributes"
+            | {{phone.phone_number}}
+        td.panel ng-show="showPanel"
+          a href="" ng-click="updatePerson(person)" Edit &nbsp;
+          a href="" ng-click="destroyPerson(person)" Delete
+    a href="/people/csv_files.csv" Download CSV
+
+div.row ng-show="personShowed"
+  div.col-xs-12.col-md-12
+    h2
+      | {{firstName}} &nbsp; {{lastName}}
+    div.emails
+      | Emails:
+      ul
+        li ng-repeat="email in emails"
+          a href="mailto:{{email.email}}"
+            | {{email.email}}
+    div.phones
+      | Phone numbers:
+      ul
+        li ng-repeat="phone in phoneNumbers"
+          | {{phone.phone_number}}
+    a href="" ng-click="showPeople()" Назад
+
+
+

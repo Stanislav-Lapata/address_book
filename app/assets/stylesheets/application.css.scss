@@ -13,3 +13,39 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.cursor {
+  cursor: pointer;
+}
+
+th, td {
+  border-right: 2px dotted black;
+  border-bottom: 2px dotted black;
+}
+
+a {
+  margin: 2px;
+}
+
+.panel {
+    border-right: none;
+}
+form{
+  vertical-align: top;
+  span {
+    display: inline-table;
+    .email {
+      display: block;
+    }
+    .number {
+      display: block;
+    }
+  }
+}
+
+p {
+  margin: 2px;
+}
