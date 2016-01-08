@@ -13,13 +13,22 @@ class PeopleController < ApplicationController
   end
 
   def create
-    binding.pry
-    render json: Person.create(params_person), include: [:email_addresses_attributes, :phone_numbers_attributes]
 
+    person = Person.new(params_person)
+    if person.save
+      render json: person, include: [:email_addresses_attributes, :phone_numbers_attributes]
+    else
+      render json: {errors: person.errors.full_messages.join(', ')}
+    end
   end
 
   def update
-    render json: Person.update(params[:id], params_person), include: [:email_addresses_attributes, :phone_numbers_attributes]
+    person = Person.find(params[:id])
+    if person.update(params_person)
+      render json: person, include: [:email_addresses_attributes, :phone_numbers_attributes]
+    else
+      render json: {errors: person.errors.full_messages.join(', ')}
+    end
   end
 
   def destroy

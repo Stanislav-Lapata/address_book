@@ -15,6 +15,10 @@ div.row ng-hide="personShowed"
           input type="button" value="-" ng-click="deletePhoneNumber(phone_number)"
         input type="button" value="+" ng-click="addFieldPhone()"
       input type="submit"
+      br
+      p.errors
+        | {{errors.errors}}
+
 
 div.row ng-hide="personShowed"
   div.col-xs-2
