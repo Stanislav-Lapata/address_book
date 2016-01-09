@@ -1,34 +1,42 @@
 div.row ng-hide="personShowed"
-  div.col-xs-12
-    form.form-inline ng-submit="addPerson()"
-      | Create person:
-      input.form-control type="text" placeholder="First name" ng-model="newPerson.first_name"
-      input.form-control type="text"  placeholder="Last name" ng-model="newPerson.last_name"
-      span
-        span.email ng-repeat="email_address in newPerson.email_addresses_attributes | filter: {'_destroy': '!1'}"
-          input.form-control type="email" placeholder="Email address" ng-model="email_address.email"
-          input.btn.btn-default type="button" value="-" ng-click="deleteEmailAddress(email_address)"
-        input.btn.btn-default type="button" value="+" ng-click="addFieldEmail()"
-      span
-        span.email ng-repeat="phone_number in newPerson.phone_numbers_attributes | filter: {'_destroy': '!1'}"
-          input.form-control type="tel" placeholder="Phone number" ng-model="phone_number.phone_number"
-          input.btn.btn-default type="button" value="-" ng-click="deletePhoneNumber(phone_number)"
-        input.btn.btn-default type="button" value="+" ng-click="addFieldPhone()"
-      button.btn.btn-default type="submit"
+  div.col-xs-3.text-center
+  div.col-xs-6.text-center
+    form.form ng-submit="addPerson()"
+      h2
         | {{addOrEdit}}
-      p.errors
-        | {{errors.errors}}
+      div.form-group
+        input.form-control type="text" placeholder="First name" ng-model="newPerson.first_name"
+        input.form-control type="text"  placeholder="Last name" ng-model="newPerson.last_name"
 
+      span.form-group ng-repeat="email_address in newPerson.email_addresses_attributes | filter: {'_destroy': '!1'}"
+        input.form-control.email type="email" placeholder="Email address" ng-model="email_address.email"
+        input.remove.btn.btn-default type="button" value="-" ng-click="deleteEmailAddress(email_address)"
+      input.text-left.btn.btn-default type="button" value="Add email address" ng-click="addFieldEmail()"
+
+      span.form-group ng-repeat="phone_number in newPerson.phone_numbers_attributes | filter: {'_destroy': '!1'}"
+        input.form-control.phone type="tel" placeholder="Phone number" ng-model="phone_number.phone_number"
+        input.remove.btn.btn-default type="button" value="-" ng-click="deletePhoneNumber(phone_number)"
+      input.text-left.btn.btn-default type="button" value="Add phone number" ng-click="addFieldPhone()"
+      button.form-control.btn.btn-default type="submit"
+        | {{addOrEdit}}
+    p.errors
+      | {{errors.errors}}
+  div.col-xs-3.text-center
 
 div.row ng-hide="personShowed"
-  div.col-xs-2
+  div.col-xs-3.text-center
+  div.col-xs-6.text-center
+    h2 Search
     | First name
     input.form-control type="text" ng-model="search.first_name"
     br
     | Last name
     input.form-control type="text" ng-model="search.last_name"
+  div.col-xs-3.text-center
 
-  div.col-xs-10
+div.row
+  div.col-xs-3
+  div.col-xs-6
     table.table.table-bordered
       tr
         th
@@ -53,6 +61,8 @@ div.row ng-hide="personShowed"
           a href="" ng-click="updatePerson(person)" Edit &nbsp;
           a href="" ng-click="destroyPerson(person)" Delete
     a href="/people/csv_files.csv" Download CSV
+    button type="button" ng-csv="people" csv-header="['id', 'First name', 'Last name', 'Email addresses']" filename="test.csv" Export
+  div.col-xs-3
 
 div.row ng-show="personShowed"
   div.col-xs-12.col-md-12

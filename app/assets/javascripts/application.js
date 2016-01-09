@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require angular
+//= require angular-sanitize
 //= require angular-resource
+//= require ng-csv.min.js
 //= require turbolinks
 //= require_tree .

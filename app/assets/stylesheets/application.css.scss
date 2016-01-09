@@ -21,35 +21,19 @@
   cursor: pointer;
 }
 
-th, td {
-  border-right: 2px dotted black;
-  border-bottom: 2px dotted black;
-}
-
-a {
-  margin: 2px;
-}
-
-.panel {
-    border-right: none;
-}
-form{
-  vertical-align: top;
-  span {
-    display: inline-table;
-    .email {
-      display: block;
-    }
-    .number {
-      display: block;
-    }
-  }
-}
-
-p {
-  margin: 2px;
-}
-
 .errors {
   color: red;
+}
+
+.email, .phone {
+  width: 95%;
+  display: inline-block;
+
+}
+.remove {
+  width: 5%;
+}
+
+.button-add {
+  text-align: left;
 }

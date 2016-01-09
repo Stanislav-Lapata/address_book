@@ -1,5 +1,5 @@
 
-var app = angular.module('AddressBook', ['ngResource']);
+var app = angular.module('AddressBook', ['ngResource', 'ngCsv']);
 
 app.factory('Person', ['$resource', function($resource){
   return $resource('/people/:id', {id: '@id'}, {update: {method: 'PUT'}})
@@ -15,7 +15,7 @@ app.factory('PhoneNumber', ['$resource', function($resource){
 
 app.controller('PeopleCtrl', ['$scope', 'Person', 'EmailAddress', 'PhoneNumber', function($scope, Person, EmailAddress, PhoneNumber){
   $scope.people = Person.query();
-  $scope.addOrEdit = "Add person"
+  $scope.addOrEdit = "Create person"
   $scope.newPerson = {email_addresses_attributes: [{email: "", _destroy:""}], phone_numbers_attributes: [{phone_number: "", _destroy:""}]};
   $scope.addPerson = function () {
     if ($scope.newPerson.id) {
@@ -25,7 +25,7 @@ app.controller('PeopleCtrl', ['$scope', 'Person', 'EmailAddress', 'PhoneNumber',
         $scope.newPerson.email_addresses_attributes = response.email_addresses_attributes
         $scope.errors = {errors: ""};
         $scope.newPerson = {email_addresses_attributes: [{email: ""}], phone_numbers_attributes: [{phone_number: ""}]};
-        $scope.addOrEdit = "Add person"
+        $scope.addOrEdit = "Create person"
         }
         else
         {
