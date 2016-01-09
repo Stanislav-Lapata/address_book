@@ -1,42 +1,39 @@
 div.row ng-hide="personShowed"
-  div.col-xs-3.text-center
-  div.col-xs-6.text-center
+  div.col-xs-6.col-xs-offset-3.text-center
     form.form ng-submit="addPerson()"
       h2
         | {{addOrEdit}}
       div.form-group
         input.form-control type="text" placeholder="First name" ng-model="newPerson.first_name"
+      div.form-group
         input.form-control type="text"  placeholder="Last name" ng-model="newPerson.last_name"
 
       span.form-group ng-repeat="email_address in newPerson.email_addresses_attributes | filter: {'_destroy': '!1'}"
         input.form-control.email type="email" placeholder="Email address" ng-model="email_address.email"
         input.remove.btn.btn-default type="button" value="-" ng-click="deleteEmailAddress(email_address)"
-      input.text-left.btn.btn-default type="button" value="Add email address" ng-click="addFieldEmail()"
+      input.btn.btn-default type="button" value="Add email address" ng-click="addFieldEmail()"
 
       span.form-group ng-repeat="phone_number in newPerson.phone_numbers_attributes | filter: {'_destroy': '!1'}"
         input.form-control.phone type="tel" placeholder="Phone number" ng-model="phone_number.phone_number"
         input.remove.btn.btn-default type="button" value="-" ng-click="deletePhoneNumber(phone_number)"
-      input.text-left.btn.btn-default type="button" value="Add phone number" ng-click="addFieldPhone()"
+      input.btn.btn-default type="button" value="Add phone number" ng-click="addFieldPhone()"
       button.form-control.btn.btn-default type="submit"
         | {{addOrEdit}}
     p.errors
       | {{errors.errors}}
-  div.col-xs-3.text-center
 
 div.row ng-hide="personShowed"
-  div.col-xs-3.text-center
-  div.col-xs-6.text-center
+  div.col-xs-6.col-xs-offset-3.text-center
     h2 Search
     | First name
     input.form-control type="text" ng-model="search.first_name"
     br
     | Last name
     input.form-control type="text" ng-model="search.last_name"
-  div.col-xs-3.text-center
 
 div.row
-  div.col-xs-3
-  div.col-xs-6
+  div.col-xs-6.col-xs-offset-3
+    h2.text-center Address book
     table.table.table-bordered
       tr
         th
@@ -62,7 +59,6 @@ div.row
           a href="" ng-click="destroyPerson(person)" Delete
     a href="/people/csv_files.csv" Download CSV
     button type="button" ng-csv="people" csv-header="['id', 'First name', 'Last name', 'Email addresses']" filename="test.csv" Export
-  div.col-xs-3
 
 div.row ng-show="personShowed"
   div.col-xs-12.col-md-12
