@@ -59,12 +59,17 @@ div.row ng-hide="personShowed"
           a href="" ng-click="destroyPerson(person)" Delete
     a href="/people/csv_files.csv" Download CSV
     button type="button" ng-csv="people" csv-header="['id', 'First name', 'Last name', 'Email addresses']" filename="test.csv" Export
+    form action="/people/import" method="post" enctype="multipart/form-data"
+      input type="file" name="file"
+      input type="submit" name="commit"
 
 div.row ng-show="personShowed"
   div.col-xs-12.col-md-12
-    h2
+    h2.text-center
       | {{firstName}} &nbsp; {{lastName}}
-  div.col-xs-3.col-md-3
+
+  div.col-xs-3
+  div.col-xs-3.text-center
     h3 Email addresses:
     ul.list-unstyled
       li ng-repeat="email in emails"
@@ -72,11 +77,12 @@ div.row ng-show="personShowed"
           | {{email.email}}
     a href="" ng-click="showPeople()" Назад
 
-  div.col-xs-3.col-md-3
+  div.col-xs-3.text-center
     h3 Phone numbers:
     ul.list-unstyled
       li ng-repeat="phone in phoneNumbers"
         | {{phone.phone_number}}
+  div.col-xs-3
 
 
 

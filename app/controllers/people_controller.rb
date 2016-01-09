@@ -44,6 +44,10 @@ class PeopleController < ApplicationController
     end
   end
 
+  def import
+    render json: Person.import(params[:file])
+  end
+
   private
 
   def params_person

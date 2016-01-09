@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   resources :people do
     collection do
       get 'csv_files'
+      post :import
     end
+
   end
   resources :email_addresses, only: :destroy
   resources :phone_numbers, only: :destroy
